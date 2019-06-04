@@ -25,4 +25,22 @@ class Post_controller extends CI_Controller
         $data['posts'] = $this->post->getAll();
         $this->load->view("post/index",$data);
     }
+
+    function edit()
+    {
+        $id = $this->uri->segment(3);   
+        $post = $this->post->getById($id);
+        if (!$post) {
+            redirect("post_controller");
+        }
+        if(@$_POST['update_post'])
+        {
+            $postdata = $_POST['post'];
+            $this->post->update($postdata,$id);
+            $this->session->set_flashdata('message',"Post updated succesfully");
+            redirect("post_controller");
+        }
+        $data['post'] = $post;
+        $this->load->view("post/edit",$data);
+    }
 }
