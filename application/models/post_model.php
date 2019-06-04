@@ -1,6 +1,6 @@
 <?php if( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Postmodel extends CI_Model
+class Post_model extends CI_Model
 {
     var $table = "post";
     function __construct()
@@ -11,7 +11,7 @@ class Postmodel extends CI_Model
     {
         $q = $this->db->get($this->table);
         if ($q->num_rows() > 0) {
-            return $q->$result();
+            return $q->result();
         }
         return array();
     }
