@@ -61,7 +61,7 @@
                 <td><?=$post->post_content?></td>
                 <td><?=$post->post_status?></td>
                 <td><?=$post->post_date?></td>
-                <td><a href="<?=site_url("post_controller/edit/".$post->id)?>">edit</a> <a href="<?=site_url("post_controller/delete".$post->id)?>">delete</a></td>
+                <td><a href="<?=site_url("post_controller/edit/".$post->id)?>">edit</a> <a href="<?=site_url("post_controller/delete/".$post->id)?>">delete</a></td>
             </tr>
             <?php $i++; endforeach; ?>
         </tbody>

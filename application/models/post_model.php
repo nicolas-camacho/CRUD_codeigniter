@@ -28,6 +28,12 @@ class Post_model extends CI_Model
         $this->db->update($this->table,$data);
     }
 
+    function delete($id)
+    {
+        $this->db->where("id",$id);
+        $this->db->delete($this->table);
+    }
+
     function getById($id)
     {
         $this->db->where("id",$id);

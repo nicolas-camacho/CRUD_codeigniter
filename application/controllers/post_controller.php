@@ -43,4 +43,12 @@ class Post_controller extends CI_Controller
         $data['post'] = $post;
         $this->load->view("post/edit",$data);
     }
+
+    function delete()
+    {
+        $id = $this->uri->segment(3);
+        $this->post->delete($id);
+        $this->session->set_flashdata("message","Post deleted succesfully");
+        redirect("post_controller");
+    }
 }
