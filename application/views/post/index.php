@@ -34,7 +34,14 @@
         color: green;
     }
 </style>
-<div id="container">
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" />
+    <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
+    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+</head>
+<body>
+<div id="container" class="container">
     <h1>Post Listing</h1>
     <?php if($msg = $this->session->flashdata("message")): ?>
         <p class="success">
@@ -42,7 +49,7 @@
         </p>
     <?php endif; ?>
     <p><a href="<?=site_url('post_controller/create')?>">New Post</a></p>
-    <table class="crud" cellspacing="0">
+    <table id="post-list" class="table table-bordered table-stripe table-hover" cellspacing="0">
         <thead>
             <tr>
                 <th>ID</th>
@@ -54,16 +61,18 @@
             </tr>
         </thead>
         <tbody>
-            <?php $i=1; foreach ($posts as $post): ?>
-            <tr <?=($i % 2 == 0) ? 'class="even"' : ''?>>
-                <td><?=$post->id?></td>
-                <td><?=$post->post_title?></td>
-                <td><?=$post->post_content?></td>
-                <td><?=$post->post_status?></td>
-                <td><?=$post->post_date?></td>
-                <td><a href="<?=site_url("post_controller/edit/".$post->id)?>">edit</a> <a href="<?=site_url("post_controller/delete/".$post->id)?>">delete</a></td>
-            </tr>
-            <?php $i++; endforeach; ?>
         </tbody>
     </table>
 </div>
+</body>
+
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('#post-list').DataTable({
+            "ajax",{
+                url:"/post_controller/get_post",
+                type:"GET"
+            },
+        });
+    });
+</script>

@@ -22,8 +22,13 @@ class Post_controller extends CI_Controller
 
     function index()
     {
+        $this->load->view("post/index");
+    }
+
+    public function get_post()
+    {
         $data['posts'] = $this->post->getAll();
-        $this->load->view("post/index",$data);
+        echo json_encode($data['posts']);
     }
 
     function edit()
